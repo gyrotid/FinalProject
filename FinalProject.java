@@ -1,26 +1,30 @@
 import java.util.*;
 import java.io.*;
 
-public class FinalProject {
+public class FinalProject 
+{
     static ArrayList<String> activeOrders = new ArrayList<>();
     static String[] completedOrders = new String[50];
     static int completedCount = 0;
-    static final String ACTIVE_FILE = "activeOrders.txt";
-    static final String COMPLETED_FILE = "completedOrders.txt";
+    static final String aFile = "activeOrders.txt";
+    static final String cFile = "completedOrders.txt";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         Scanner scanner = new Scanner(System.in);
 
-        // Load saved data
-        activeOrders = FileHandler.loadData(ACTIVE_FILE);
-        ArrayList<String> completedList = FileHandler.loadData(COMPLETED_FILE);
+        //Loads saved data
+        activeOrders = FileHandler.loadData(aFile);
+        ArrayList<String> completedList = FileHandler.loadData(cFile);
         completedCount = completedList.size();
-        for (int i = 0; i < completedCount && i < completedOrders.length; i++) {
+        for (int i = 0; i < completedCount && i < completedOrders.length; i++) 
+        {
             completedOrders[i] = completedList.get(i);
         }
 
         int choice;
-        do {
+        do 
+        {
             System.out.println("\n--- Restaurant Order System ---");
             System.out.println("1. Add new order");
             System.out.println("2. View active orders");
@@ -31,7 +35,8 @@ public class FinalProject {
 
             choice = InputValidator.getUserInput();
 
-            switch (choice) {
+            switch (choice) 
+            {
                 case 1:
                     System.out.print("Enter new order description: ");
                     String order = scanner.nextLine();
@@ -41,37 +46,49 @@ public class FinalProject {
 
                 case 2:
                     System.out.println("Active Orders:");
-                    if (activeOrders.isEmpty()) {
+                    if (activeOrders.isEmpty()) 
+                    {
                         System.out.println("No active orders.");
-                    } else {
-                        for (int i = 0; i < activeOrders.size(); i++) {
+                    } 
+                    else 
+                    {
+                        for (int i = 0; i < activeOrders.size(); i++) 
+                        {
                             System.out.println((i + 1) + ". " + activeOrders.get(i));
                         }
                     }
                     break;
 
                 case 3:
-                    if (activeOrders.isEmpty()) {
+                    if (activeOrders.isEmpty()) 
+                    {
                         System.out.println("No active orders to complete.");
                         break;
                     }
                     System.out.println("Enter the index of the order to complete:");
                     int index = InputValidator.getUserInput() - 1;
-                    try {
+                    try 
+                    {
                         String completed = activeOrders.remove(index);
                         completedOrders[completedCount++] = completed;
                         System.out.println("Order completed: " + completed);
-                    } catch (IndexOutOfBoundsException e) {
+                    } 
+                    catch (IndexOutOfBoundsException e) 
+                    {
                         System.out.println("Invalid order index. Try again.");
                     }
                     break;
 
                 case 4:
                     System.out.println("Completed Orders:");
-                    if (completedCount == 0) {
+                    if (completedCount == 0) 
+                    {
                         System.out.println("No completed orders yet.");
-                    } else {
-                        for (int i = 0; i < completedCount; i++) {
+                    } 
+                    else 
+                    {
+                        for (int i = 0; i < completedCount; i++) 
+                        {
                             System.out.println((i + 1) + ". " + completedOrders[i]);
                         }
                     }
@@ -85,15 +102,18 @@ public class FinalProject {
                 default:
                     System.out.println("Invalid choice! Please try again.");
             }
-        } while (choice != 5);
+        } 
+        while (choice != 5);
     }
 
-    private static void saveAllData() {
-        FileHandler.saveData(activeOrders, ACTIVE_FILE);
+    private static void saveAllData() 
+    {
+        FileHandler.saveData(activeOrders, aFile);
         ArrayList<String> completedList = new ArrayList<>();
-        for (int i = 0; i < completedCount; i++) {
+        for (int i = 0; i < completedCount; i++) 
+        {
             completedList.add(completedOrders[i]);
         }
-        FileHandler.saveData(completedList, COMPLETED_FILE);
+        FileHandler.saveData(completedList, cFile);
     }
 }
