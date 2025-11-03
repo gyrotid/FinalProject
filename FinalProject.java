@@ -3,7 +3,7 @@ import java.io.*;
 
 public class FinalProject {
     static ArrayList<String> activeOrders = new ArrayList<>();
-    static String[] completedOrders = new String[50]; // example array
+    static String[] completedOrders = new String[50];
     static int completedCount = 0;
     static final String ACTIVE_FILE = "activeOrders.txt";
     static final String COMPLETED_FILE = "completedOrders.txt";
